@@ -1,51 +1,71 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.tsx'),
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  mode: 'development',
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    port: 8888
-  },
+  entry: path.join(__dirname, "src", "index.tsx"),
+  devtool: "source-map",
   resolve: {
-    extensions: ['.js', '.ts', '.tsx']
+    extensions: [".ts", ".tsx", ".js", ".json"]
   },
+  devServer: {
+    contentBase: path.join(__dirname, "src"),
+    watchContentBase: true,
+    historyApiFallback: true
+  },
+  output: {
+    path: path.join(__dirname, "dist"),
+    filename: "index_bundle.js"
+  },
+  mode: process.env.NODE_ENV || "development",
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        // this is so that we can compile any React,
+        // ES6 and above into normal ES5 syntax
+        test: /\.(js|jsx)$/,
+        // we do not want anything from node_modules to be compiled
         exclude: /node_modules/,
-        use: ['ts-loader']
+        use: "babel-loader"
       },
       {
-        test: /\.s(a|c)ss$/,
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: "awesome-typescript-loader",
+        query: {
+          presets: ["react", "es2015"]
+        }
+      },
+      {
+        test: /\.(css|scss)$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               modules: {
-                localIdentName: '[local]-[hash:base64:5]',
-              }
+                localIdentName: '[local]-[hash:base64:3]',
+              },
             }
           },
-          'sass-loader'
+          {
+            loader: "sass-loader",
+            options: {
+              data: '@import "./global.scss";',
+              includePaths: [__dirname, "./src/scss/"]
+            }
+          }
         ]
       },
       {
-        test: /\.html/,
-        use: ['html-loader']
+        test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
+        loaders: ["file-loader"]
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'public', 'index.html')
+      template: path.join(__dirname, "public", "index.html")
     })
   ]
 };
