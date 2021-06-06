@@ -2,8 +2,7 @@
   "name": "cb-design-system",
   "version": "1.0.0",
   "description": "A Component Library built with Webpack, Storybook and React",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "HTTPS=true webpack-dev-server --mode development --open --hot",
     "storybook": "start-storybook -p 9001 -c .storybook",
@@ -29,8 +28,8 @@
   "author": "Harry Ghazni",
   "license": "MIT",
   "dependencies": {
-    "react": "16.8.1",
-    "react-dom": "16.8.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "react-loading-skeleton": "^2.2.0"
   },
   "devDependencies": {

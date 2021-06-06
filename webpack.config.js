@@ -1,6 +1,17 @@
 const path = require("path");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const dotenv = require('dotenv');
+
+// call dotenv and it will return an Object with a parsed key
+const env = dotenv.config().parsed;
+
+// reduce it to a nice object, the same as before
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.tsx"),
@@ -18,25 +29,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "index.js",
-    publicPath: '/',
-    libraryTarget: 'commonjs2',
-    library: 'cb-design-system',
-    umdNamedDefine: true
-  },
-  externals: {      
-    react: {          
-        commonjs: "react",          
-        commonjs2: "react",          
-        amd: "React",          
-        root: "React"      
-    },      
-    "react-dom": {          
-        commonjs: "react-dom",          
-        commonjs2: "react-dom",          
-        amd: "ReactDOM",          
-        root: "ReactDOM"      
-    },
+    filename: "bundle.js"
   },
   mode: process.env.NODE_ENV || "development",
   module: {
@@ -87,7 +80,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "public", "index.html")
-    })
+      template: path.join(__dirname, "public", "index.html"),
+      filename: './index.html'
+    }),
+    new webpack.DefinePlugin(envKeys)
   ]
 };
