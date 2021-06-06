@@ -1,0 +1,26 @@
+.header {
+    width: 100%;
+    background-color: $white;
+}
+
+.inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    color: $black;
+}
+
+.menu {
+    display: flex;
+    list-style-type: none;
+    color: $black;
+    margin: 0;
+}
+
+.link {
+    padding-right: 10px;
+}

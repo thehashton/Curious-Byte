@@ -1,10 +1,14 @@
 import React from 'react';
+import scss from './App.scss';
+import Header from './components/Header';
 
 const App: React.FC = () => {
     return (
-        <>
-            <h1>lololol</h1>
-        </>
+        <div className={scss.app}>
+            <Header />
+            <div>body</div>
+            <div>footer</div>
+        </ div>
     )
 }
 
