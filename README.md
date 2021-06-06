@@ -1,5 +1,3 @@
-# CB Design System
+# Curious Byte official website
 
-Our component driven design system with React, Webpack and Storybook
-
-NPM: https://www.npmjs.com/package/cb-design-system
+This will be the hub for all things Curious Byte
