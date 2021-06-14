@@ -89,7 +89,7 @@
     "npm-prepare-dist": "^0.3.0",
     "open": "6.2.0",
     "open-cli": "1.0.5",
-    "postcss": "^7",
+    "postcss": "^8",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^5.0.0",
     "postcss-sass-loader": "1.1.0",
