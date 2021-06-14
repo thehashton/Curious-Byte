@@ -1,8 +1,9 @@
 import React from 'react';
+import scss from './Home.scss';
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
-    <div>
+    <div className={scss.home}>
       Home
     </div>
   );
