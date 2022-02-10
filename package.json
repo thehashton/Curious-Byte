@@ -85,7 +85,7 @@
     "https": "1.0.0",
     "lint-staged": "8.2.1",
     "mini-css-extract-plugin": "0.7.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "npm-prepare-dist": "^0.3.0",
     "open": "6.2.0",
     "open-cli": "1.0.5",
